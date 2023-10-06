@@ -1,0 +1,41 @@
+// C++ code
+//
+#include <Adafruit_LiquidCrystal.h>
+Adafruit_LiquidCrystal lcd(0);
+int const PIN_SENSOR=A1;
+int LED_GREEN=7;
+int LED_YELLOW=6;
+int LED_RED1=5;
+int LED_RED2=4;
+
+void setup()
+{
+  pinMode(LED_GREEN, OUTPUT);
+  pinMode(LED_YELLOW, OUTPUT);
+  pinMode(LED_RED1, OUTPUT);
+  pinMode(LED_RED2, OUTPUT);
+  lcd.begin(16,2);
+  lcd.print("Turning on.");
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  lcd.clear();
+  int value = analogRead(PIN_SENSOR);
+  value = map(value, 300, 750, 0, 100);
+  Serial.println(value);
+  digitalWrite(LED_GREEN, HIGH);
+  digitalWrite(LED_YELLOW, value >=30 ? HIGH : LOW);
+ 
+  digitalWrite(LED_RED1, value >=50 ? HIGH : LOW);
+  digitalWrite(LED_RED2, value >=80 ? HIGH : LOW);
+                lcd.print("LED_RED2");
+  delay(250); 
+}
+
+
+
+
+
+

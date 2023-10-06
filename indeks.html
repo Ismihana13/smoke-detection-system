@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT projekat</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div id="krug">
+        <div id="slika1"> <img src="off.jpg" id="slika" ></div>
+       
+    </div>
+    <div id="prvougaonik">
+        <div id="poruka"></div>
+        <div id="dugmad">
+            <input type="button"  value="On" id="btnon">
+            <input type="button"  value="Off" id="btnoff">
+        </div>
+    </div>
+    <div id="krug2">
+        <h3>Senzor</h3>
+        <img src="smoke.jpg"  id="slikasenzor">
+    </div>
+<script type="module">
+       
+  // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+ // import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-analytics.js";
+    import { getDatabase, ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyBuL86qAQAeFXkPg2cGW-eIp5ZXezVTxNI",
+    authDomain: "smokealarm-81cb0.firebaseapp.com",
+  databaseURL: "https://smokealarm-81cb0-default-rtdb.europe-west1.firebasedatabase.app/",
+  projectId: "smokealarm-81cb0",
+  storageBucket: "smokealarm-81cb0.appspot.com",
+  messagingSenderId: "189420492242",
+  appId: "1:189420492242:web:91fdf95b404c18924d640b",
+  
+};
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+ 
+        let poruka = document.getElementById("poruka");
+        var onBtn = document.getElementById("btnon");
+        var offBtn = document.getElementById("btnoff");
+        const audio = new Audio('alarm.mp3');
+
+        const smokealarm = ref(db, 'smokealarm');
+        const smokealarmRef = ref(db, 'smokealarm');
+       onValue(smokealarmRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                // Ažuriraj sliku na osnovu novog stanja
+               document.getElementById('slika').src = 'on.jpg';
+            } else {
+                document.getElementById('slika').src = 'off.jpg';
+    }
+});
+        onValue(smokealarm, (snapshot) => {
+            const data = snapshot.val();
+            if(data) {
+                poruka.style.color="red" 
+                poruka.innerHTML = "Alarm upaljen!"
+                audio.play();
+            } 
+            else {
+                poruka.style.color="blue" 
+                poruka.innerHTML = "Alarm ugasen!"
+                audio.pause();
+            }
+        }); 
+       
+     
+
+function On() {
+ 
+ document.getElementById('slika').src = 'on.jpg';
+ 
+}
+function Off() {
+  
+  document.getElementById('slika').src = 'off.jpg';
+
+}
+onBtn.addEventListener('click', () => {
+            set(ref(db, 'smokealarm'),
+                true
+            );
+       
+            On();
+        });
+        offBtn.addEventListener('click', () => {
+             set(ref(db, 'smokealarm'), 
+                false
+            );
+   
+       
+           Off();
+        });
+        let smoke = document.getElementById("slikasenzor");
+        smoke.addEventListener('click', ()=> {
+           set(ref(db, 'smokealarm'), 
+                true
+            );
+        
+            On();
+        })
+
+    </script>
+</body>
+</html>

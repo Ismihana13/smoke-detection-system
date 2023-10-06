@@ -1,0 +1,88 @@
+html, body{
+    width: 100%;
+    height: 100%;
+    background-color:white;
+    padding: 0%;
+    margin: 0%;
+    background-image: url('pametne-kuće.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  #krug{
+    width: 400px;
+    height: 300px;
+    border-radius: 50%; /* Ovo čini kvadratni element u krug */
+    /* Opciono: boja pozadine kruga */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.945);
+    
+  }
+  #slika1 {
+    width: 300px; /* Prilagodite veličinu po potrebi */
+    height: 225px; /* Prilagodite veličinu po potrebi */
+    border-radius: 45%; /* Postavlja sliku u krug */
+    overflow: hidden; /* Skriva sadržaj koji prelazi granice kruga */
+}
+  #slika1 img{
+    width: 300px;
+    height: 225px;
+    object-fit: cover;
+  }
+  #prvougaonik{
+    width: 350px;
+    height: 125px;
+    
+    background-color: rgba(201, 244, 255, 0.979);
+    margin-top: 60px;
+    margin-left: 400px;
+  }
+  #dugmad{
+    padding-top: 30px;
+    padding-left: 85px;
+  }
+  #btnon {
+    background-color: rgb(89, 197, 89);
+    width: 80px;
+    height: 45px;
+    border: none;
+    color: aliceblue;
+    border: 2px solid #51f705;
+    margin-right: 50px;
+  }
+  #btnoff {
+    background-color: rgb(221, 115, 88);
+    width: 80px;
+    height: 45px;
+    border: none;
+    color: aliceblue;
+    border: 2px solid #ff0000;
+  }
+  #krug2{
+    width: 250px;
+    height: 150px;
+    border-radius: 50%; /* Ovo čini kvadratni element u krug */
+    /* Opciono: boja pozadine kruga */
+    margin-left: 650px;
+    margin-top: -450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.945);
+
+    
+  }
+  #poruka{
+    padding-top: 15px;
+    padding-left: 100px;
+    font-weight: bold;
+    font-size: 22px;
+  }
+  #slikasenzor{
+    width: 170px; /* Prilagodite širinu slike po potrebi */
+    height: 120px; /* Prilagodite visinu slike po potrebi */
+    border-radius: 50%; /* Postavlja sliku u krug */
+    object-fit: cover; /* Skalira sliku da prekrije ceo krug */
+    overflow: hidden;
+  }
